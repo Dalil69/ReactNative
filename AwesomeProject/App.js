@@ -1,47 +1,69 @@
 import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
-import NotificationsScreen from './screens/NotificationsScreen';
-import { TaskContext } from './screens/TaskContext';
+import MailScreen from './screens/MailScreen';
+import TaskProvider from './screens/TaskContext';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
+
+  const handleDecrement = () => {
+    setCount(count - 1);
+  };
 
   return (
-    <NavigationContainer>
-      <TaskContext.Provider value={{ tasks, setTasks }}>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-
-              if (route.name === 'Search') {
-                iconName = focused ? 'search' : 'search';
-              } else if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home';
-              } else if (route.name === 'Notifications') {
-                iconName = focused ? 'notifications' : 'notifications';
-              }
-
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: 'white',
-            inactiveTintColor: 'gray',
-            style: { backgroundColor: 'gray' },
-          }}
-        >
-          <Tab.Screen name="Search" component={SearchScreen} />
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Notifications" component={NotificationsScreen} />
+    <TaskProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Search"
+            component={SearchScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="magnify" color={color} size={size} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Mail"
+            component={MailScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="email" color={color} size={size} />
+              ),
+            }}
+          />
         </Tab.Navigator>
-      </TaskContext.Provider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </TaskProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
