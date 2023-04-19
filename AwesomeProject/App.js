@@ -26,7 +26,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
-            name="Home"
+            name="TodoList"
             component={HomeScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
