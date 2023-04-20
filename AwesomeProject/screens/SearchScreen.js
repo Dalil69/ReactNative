@@ -30,7 +30,7 @@ export default function SearchScreen({ navigation }) {
   // Fonction pour gérer la sélection d'une tâche
   const handleSelectTask = (task) => {
     console.log('Tâche sélectionnée :', task);
-    navigation.navigate('Home', { task }); // Naviguer vers la page "Home" et passer la tâche sélectionnée en paramètre
+    navigation.navigate('TodoList', { task }); // Naviguer vers la page "Home" et passer la tâche sélectionnée en paramètre
   };
 
   // Fonction pour le rendu de chaque élément de la liste
