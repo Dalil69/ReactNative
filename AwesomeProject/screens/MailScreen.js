@@ -52,7 +52,7 @@ export default function MailScreen() {
         style={styles.bodyInput}
         onChangeText={(text) => setBody(text)}
         value={body}
-        placeholder="Corps de l'e-mail"
+        placeholder="Message"
         multiline={true}
         numberOfLines={5}
       />
