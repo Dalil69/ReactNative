@@ -3,28 +3,37 @@ import { Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import { TaskContext } from './TaskContext';
 
 export default function SearchScreen({ navigation }) {
+
+  // Récupération de la liste des tâches
   const { tasks } = useContext(TaskContext);
+
+  // Etat local du texte de recherche
   const [search, setSearch] = useState('');
+
+  // Etat local des tâches filtrées
   const [filteredTasks, setFilteredTasks] = useState([]);
 
+  // Utilisation d'un effet pour filtrer la liste des tâches en fonction du texte de recherche
   useEffect(() => {
-    if (search === '') {
-      setFilteredTasks([]);
-    } else {
+    if (search === '') {  // Si le champ de recherche est vide
+      setFilteredTasks([]); // Réinitialiser la liste filtrée
+    } else { // Sinon
       setFilteredTasks(
         tasks.filter(
           (task) =>
             task.title && task.title.toLowerCase().includes(search.toLowerCase())
         )
-      );
+      ); // Filtrer la liste des tâches en fonction du texte de recherche
     }
   }, [search, tasks]);
 
+  // Fonction pour gérer la sélection d'une tâche
   const handleSelectTask = (task) => {
     console.log('Tâche sélectionnée :', task);
-    navigation.navigate('Home', { task });
+    navigation.navigate('Home', { task }); // Naviguer vers la page "Home" et passer la tâche sélectionnée en paramètre
   };
 
+  // Fonction pour le rendu de chaque élément de la liste
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleSelectTask(item)}>
       <Text style={{ padding: 15, backgroundColor: 'rgba(255, 128, 0, 0.4)' }}>

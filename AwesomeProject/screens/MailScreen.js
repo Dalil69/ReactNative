@@ -4,22 +4,29 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
 
 export default function MailScreen() {
+
+  // Déclaration de trois états pour les champs du formulaire
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
 
+  // Fonction appelée lorsque l'utilisateur envoie le formulaire
   const handleSend = async () => {
+    // Définition des options pour l'envoi de l'email
     let options = {
       recipients: [to],
       subject: subject,
       body: body,
     };
+    // Utilisation du module expo-mail-composer pour composer et envoyer l'email
     await MailComposer.composeAsync(options);
+    // Réinitialisation des états des champs du formulaire après l'envoi
     setTo('');
     setSubject('');
     setBody('');
   };
 
+  // Affichage du formulaire et du bouton d'envoi
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Envoyer un e-mail</Text>
@@ -56,6 +63,7 @@ export default function MailScreen() {
   );
 }
 
+// Définition des styles pour les éléments du formulaire
 const styles = StyleSheet.create({
   container: {
     flex: 1,

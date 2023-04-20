@@ -14,11 +14,13 @@ function HomeScreen() {
   const { tasks, setTasks } = useContext(TaskContext);
   const [inputValue, setInputValue] = useState('');
 
+  // Fonction pour ajouter une tâche
   const addTask = () => {
     setTasks([...tasks, { id: tasks.length + 1, title: inputValue, completed: false }]);
     setInputValue('');
   };
 
+  // Fonction pour modifier le statut d'une tâche
   const toggleTask = (id) => {
     const newTasks = [...tasks];
     const taskIndex = newTasks.findIndex((task) => task.id === id);
@@ -26,6 +28,7 @@ function HomeScreen() {
     setTasks(newTasks);
   };
 
+  // Fonction pour supprimer une tâche
   const removeTask = (id) => {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);

@@ -11,23 +11,28 @@ import TaskProvider from './screens/TaskContext';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  // Déclare la variable "count" et une fonction "setCount" pour modifier sa valeur
   const [count, setCount] = useState(0);
 
+  // Fonction pour incrémenter la valeur de "count"
   const handleIncrement = () => {
     setCount(count + 1);
   };
 
+  // Fonction pour décrémenter la valeur de "count"
   const handleDecrement = () => {
     setCount(count - 1);
   };
 
   return (
+    // Fournit le contexte des tâches à toute l'application
     <TaskProvider>
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
             name="TodoList"
             component={HomeScreen}
+            // Option pour ajouter une icône "home" à l'onglet correspondant
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="home" color={color} size={size} />
@@ -37,6 +42,7 @@ export default function App() {
           <Tab.Screen
             name="Search"
             component={SearchScreen}
+            // Option pour ajouter une icône "magnify" à l'onglet correspondant
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="magnify" color={color} size={size} />
@@ -46,6 +52,7 @@ export default function App() {
           <Tab.Screen
             name="Mail"
             component={MailScreen}
+            // Option pour ajouter une icône "email" à l'onglet correspondant
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="email" color={color} size={size} />
@@ -66,4 +73,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
